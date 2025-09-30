@@ -240,59 +240,6 @@ def montar_resumo_blocos_por_ala(resultados: list[dict], ala: str):
     return pd.DataFrame()
 
 
-# ---------------- Resumo por Blocos ----------------
-# def montar_resumo_blocos_por_ala(resultados: list[dict], ala: str):
-#     df = pd.DataFrame(resultados)
-#     df = df.dropna(subset=["Saída Principal"]).copy()
-#     df["Saída Principal"] = df["Saída Principal"].astype(int)
-#
-#     blocos = {
-#         "Ala D": [(1, 5), (6, 11), (12, 16), (17, 22), (23, 27),
-#                   (28, 33), (34, 39), (40, 43)],
-#         "Ala C": [(44, 48), (49, 54), (55, 59), (60, 65), (66, 71), (72, 76)],
-#         "Ala B": [(77, 80), (81, 86), (87, 91), (92, 97), (98, 103), (104, 108)],
-#         "Ala A": [(109, 113), (114, 119), (120, 124), (125, 130),
-#                   (131, 136), (137, 142), (143, 148), (149, 152)]
-#     }
-#
-#     st.header(f"📊 Resumo - {ala}")
-#     resumo_blocos = []
-#
-#     total_ala = df[df["Saída Principal"].between(blocos[ala][0][0], blocos[ala][-1][1])].shape[0]
-#
-#     for ini, fim in blocos[ala]:
-#         df_bloco = df[(df["Saída Principal"] >= ini) & (df["Saída Principal"] <= fim)]
-#         if df_bloco.empty:
-#             continue
-#
-#         resumo = (
-#             df_bloco.groupby("Saída Principal")
-#             .size()
-#             .reset_index(name="Total")
-#             .sort_values("Saída Principal")
-#         )
-#
-#         resumo["% na Ala"] = (resumo["Total"] / total_ala * 100).map("{:.2f}%".format)
-#
-#         total_bloco = resumo["Total"].sum()
-#         resumo_total = pd.DataFrame({
-#             "Saída Principal": ["TOTAL"],
-#             "Total": [total_bloco],
-#             "% na Ala": [f"{(total_bloco / total_ala * 100):.2f}%"]
-#         })
-#
-#         resumo = pd.concat([resumo, resumo_total], ignore_index=True)
-#
-#         st.subheader(f"Bloco {ini}-{fim}")
-#         st.dataframe(resumo.rename(columns={"Saída Principal": "Rampa"}), use_container_width=True)
-#
-#         resumo["Bloco"] = f"{ini}-{fim}"
-#         resumo_blocos.append(resumo)
-#
-#     if resumo_blocos:
-#         return pd.concat(resumo_blocos, ignore_index=True)
-#     return pd.DataFrame()
-
 # ---------------- Exportação ----------------
 def exportar_triagem_excel(plano, ceps, resumo_blocos_df):
     if plano is None or ceps is None:
@@ -400,3 +347,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
