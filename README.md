@@ -39,7 +39,7 @@ Pandas (para manipulação de dados)
 
 OpenPyXL (para leitura e escrita de arquivos Excel)
 
-![Tela Layout](screen_first.png)
+![Tela Layout](screen_first.PNG)
 
 ![Tela Layout modo Dark](screen_first1.PNG)
 
